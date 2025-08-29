@@ -1,6 +1,6 @@
 # Copilot Instructions
 
-This project is a **Stock Interval Trading Calculator**, focused on suggesting buy/sell points based on price, volume, and institutional chip data. **Use only English or TW-ZH in response.**
+This project is a **Stock Interval Trading Calculator**, focused on suggesting buy/sell points based on price, volume, and institutional chip data. **Use only English or zh-TW in response.**
 
 ## 💡 Coding Vibe
 
@@ -23,6 +23,7 @@ This project is a **Stock Interval Trading Calculator**, focused on suggesting b
 Follow **Conventional Commits** specification:
 
 ### Format
+
 ```
 <type>[optional scope]: <description>
 
@@ -32,6 +33,7 @@ Follow **Conventional Commits** specification:
 ```
 
 ### Types
+
 - `feat`: New feature for the user
 - `fix`: Bug fix for the user
 - `docs`: Documentation changes
@@ -43,6 +45,7 @@ Follow **Conventional Commits** specification:
 - `ci`: CI configuration changes
 
 ### Examples
+
 ```bash
 feat(strategy): add SimpleStrategy with chip analysis
 fix(util): handle empty arrays in statistical functions
@@ -53,10 +56,69 @@ chore(deps): update puppeteer to v24.15.0
 ```
 
 ### Scope
+
 Use these scopes when applicable:
+
 - `util`: Mathematical utilities and helpers
 - `strategy`: Trading strategy implementations
 - `cli`: Command line interface
 - `refresh`: Data fetching and refresh logic
 - `test`: Test-related changes
 - `deps`: Dependency updates
+
+## 🌲 Development Workflow
+
+Follow **Trunk-based Development** principles:
+
+### Core Principles
+
+- **Main branch is always releasable**: All commits to main should be production-ready
+- **Short-lived feature branches**: Features developed in branches that live for hours/days, not weeks
+- **Small, frequent commits**: Prefer many small commits over large batch changes
+- **Continuous integration**: Commit and integrate multiple times per day
+
+### Branch Strategy
+
+```bash
+# ✅ Preferred: Direct commits to main for small changes
+git checkout main
+git add .
+git commit -m "feat(util): add EMA calculation"
+git push origin main
+
+# ✅ For larger features: Short-lived feature branches
+git checkout -b feat/backtest-engine
+# ... develop feature ...
+git commit -m "feat(backtest): implement basic backtest runner"
+git checkout main
+git merge feat/backtest-engine --no-ff
+git branch -d feat/backtest-engine
+git push origin main
+```
+
+### Integration Rules
+
+- **Maximum branch lifetime**: 2-3 days
+- **Pull/rebase frequently**: `git pull origin main` multiple times daily
+- **Feature flags for incomplete features**: Use feature toggles for WIP features
+- **Hotfixes go directly to main**: Critical fixes bypass feature branches
+
+### Quality Gates
+
+- All tests must pass before merging
+- No breaking changes without version bump
+- Code review for complex changes (optional for small fixes)
+- **CI pipeline must pass**: Automated checks via GitHub Actions
+  - ✅ Linting (ESLint)
+  - ✅ Type checking (TypeScript)
+  - ✅ Unit tests (Node.js native runner)
+  - ✅ Build verification
+  - ✅ Security audit (pnpm audit)
+  - ✅ Multi-Node.js version compatibility (18, 20, 22)
+
+### Collaboration Guidelines
+
+- **Communicate early**: Share WIP branches for feedback
+- **Pair programming encouraged**: Especially for complex algorithms
+- **Documentation updates**: Keep README and docs in sync with code changes
+- **Breaking changes**: Coordinate with team and document in commit message
