@@ -114,7 +114,7 @@ git push origin main
   - ✅ Unit tests (Node.js native runner)
   - ✅ Build verification
   - ✅ Security audit (pnpm audit)
-  - ✅ Multi-Node.js version compatibility (18, 20, 22)
+  - ✅ Node.js 22+ compatibility
 
 ### Collaboration Guidelines
 

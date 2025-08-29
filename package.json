@@ -15,6 +15,10 @@
   "keywords": [],
   "author": "",
   "license": "MIT",
+  "engines": {
+    "node": ">=22.0.0",
+    "pnpm": ">=10.14.0"
+  },
   "packageManager": "pnpm@10.14.0",
   "dependencies": {
     "commander": "^14.0.0",
